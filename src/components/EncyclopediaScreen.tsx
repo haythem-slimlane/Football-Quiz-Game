@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search, ChevronDown, ChevronUp, Check, BookOpen, Filter } from 'lucide-react';
-import { allQuestions, quizCategories } from '../data/questions';
+import { allQuestions, quizCategories, isCategoryMatch, normalizeArabic } from '../data/questions';
 import { playTapSound } from '../utils/audio';
 
 export const EncyclopediaScreen: React.FC = () => {
@@ -11,13 +11,21 @@ export const EncyclopediaScreen: React.FC = () => {
   const PAGE_SIZE = 25;
 
   const filteredQuestions = useMemo(() => {
+    const normSearch = normalizeArabic(searchQuery);
     return allQuestions.filter(q => {
-      const matchCat = selectedCategory === 'all' || q.category === selectedCategory;
-      const matchSearch = 
-        q.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        q.options.some(opt => opt.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        q.explanation.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchCat && matchSearch;
+      const matchCat = isCategoryMatch(q.category, selectedCategory);
+      if (!matchCat) return false;
+      if (!normSearch) return true;
+
+      const normQuestion = normalizeArabic(q.question);
+      const normExplanation = normalizeArabic(q.explanation);
+      const normOptions = q.options.some(opt => normalizeArabic(opt).includes(normSearch));
+
+      return (
+        normQuestion.includes(normSearch) ||
+        normExplanation.includes(normSearch) ||
+        normOptions
+      );
     });
   }, [searchQuery, selectedCategory]);
 

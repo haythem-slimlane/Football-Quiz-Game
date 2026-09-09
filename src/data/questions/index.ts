@@ -46,3 +46,41 @@ export const quizCategories = [
   { id: 'ملاعب وتاريخ', name: 'ملاعب وتاريخ', count: 30, icon: 'Landmark' },
   { id: 'أرقام قياسية وكرة حديثة', name: 'أرقام قياسية وكرة حديثة', count: 25, icon: 'Zap' },
 ];
+
+export function normalizeArabic(text: string): string {
+  if (!text) return '';
+  return text
+    .trim()
+    .replace(/[أإآ]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .replace(/ى/g, 'ي')
+    .replace(/[\u064B-\u065F]/g, '') // remove Arabic diacritics
+    .toLowerCase();
+}
+
+export function isCategoryMatch(questionCategory: string, selectedCategory?: string): boolean {
+  if (!selectedCategory || selectedCategory === 'all' || selectedCategory === 'جميع الأسئلة') {
+    return true;
+  }
+  const normQ = normalizeArabic(questionCategory);
+  const normS = normalizeArabic(selectedCategory);
+  if (normQ === normS) return true;
+
+  // World cup aliases
+  if (normS.includes('عالم') && normQ.includes('عالم')) return true;
+  // Legends aliases
+  if ((normS.includes('اساطير') || normS.includes('اسطوره')) && (normQ.includes('اساطير') || normQ.includes('اسطوره'))) return true;
+  // African football aliases
+  if (normS.includes('افريقي') && normQ.includes('افريقي')) return true;
+  // Tunisian football aliases
+  if (normS.includes('تونس') && normQ.includes('تونس')) return true;
+  // Arab football aliases
+  if (normS.includes('عرب') && normQ.includes('عرب')) return true;
+  // Champions League aliases
+  if (normS.includes('ابطال') && normQ.includes('ابطال')) return true;
+  // European leagues aliases
+  if (normS.includes('دوريات') && normQ.includes('دوريات')) return true;
+
+  return false;
+}
+

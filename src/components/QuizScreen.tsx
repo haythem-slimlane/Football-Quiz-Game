@@ -4,7 +4,7 @@ import {
   HelpCircle, Sparkles, Volume2, VolumeX, AlertCircle 
 } from 'lucide-react';
 import { Question, GameModeInfo, UserAnswer, QuizSessionSummary } from '../types';
-import { allQuestions } from '../data/questions';
+import { allQuestions, isCategoryMatch } from '../data/questions';
 import { 
   playCorrectSound, playWrongSound, playTapSound, 
   playTickSound, playLifelineSound, isSoundEnabled, toggleSound 
@@ -26,8 +26,11 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
   // 1. Prepare questions for this session
   const questionsList = useMemo(() => {
     let pool = [...allQuestions];
-    if (selectedCategoryName && selectedCategoryName !== 'جميع الأسئلة') {
-      pool = pool.filter(q => q.category === selectedCategoryName);
+    if (selectedCategoryName && selectedCategoryName !== 'جميع الأسئلة' && selectedCategoryName !== 'all') {
+      const filtered = pool.filter(q => isCategoryMatch(q.category, selectedCategoryName));
+      if (filtered.length > 0) {
+        pool = filtered;
+      }
     }
     // Shuffle pool
     const shuffled = [...pool].sort(() => Math.random() - 0.5);
