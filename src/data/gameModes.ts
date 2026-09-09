@@ -1,19 +1,20 @@
 import { GameModeInfo } from '../types';
 
+export const CATEGORY_GAME_MODE: GameModeInfo = {
+  id: 'categories',
+  title: 'حسب التصنيف',
+  subtitle: 'اختر مجالك المفضل',
+  description: '13 تصنيفاً متخصصاً: كأس العالم، دوري الأبطال، الكرة التونسية، الأساطير، التكتيك، والقوانين.',
+  iconName: 'Grid',
+  badgeText: '13 تصنيف',
+  questionCount: 10,
+  hasTimer: true,
+  timePerQuestion: 20,
+  hasLives: true,
+  initialLives: 3,
+};
+
 export const GAME_MODES: GameModeInfo[] = [
-  {
-    id: 'classic',
-    title: 'الوضع الكلاسيكي',
-    subtitle: '3 حيوات ومؤقت متوازن',
-    description: 'اختبار كروي متدرج مع 3 قلوب ومؤقت 20 ثانية. حافظ على الحيوات واجمع أعلى نقاط.',
-    iconName: 'Trophy',
-    badgeText: 'الأكثر شعبية',
-    questionCount: 15,
-    hasTimer: true,
-    timePerQuestion: 20,
-    hasLives: true,
-    initialLives: 3,
-  },
   {
     id: 'ten_questions',
     title: '10 أسئلة سريعة',
@@ -37,31 +38,6 @@ export const GAME_MODES: GameModeInfo[] = [
     hasTimer: true,
     timePerQuestion: 20,
     hasLives: false,
-  },
-  {
-    id: 'challenge',
-    title: 'تحدي البقاء (Sudden Death)',
-    subtitle: 'خطأ واحد ينتهي التحدي!',
-    description: 'أقوى اختبار للأعصاب! لديك قلب واحد فقط و15 ثانية لكل سؤال. إلى أي سؤال يمكنك الصمود؟',
-    iconName: 'Flame',
-    badgeText: 'للمحترفين فقط',
-    hasTimer: true,
-    timePerQuestion: 15,
-    hasLives: true,
-    initialLives: 1,
-  },
-  {
-    id: 'categories',
-    title: 'حسب التصنيف',
-    subtitle: 'اختر مجالك المفضل',
-    description: '13 تصنيفاً متخصصاً: كأس العالم، دوري الأبطال، الكرة التونسية، الأساطير، التكتيك، والقوانين.',
-    iconName: 'Grid',
-    badgeText: '13 تصنيف',
-    questionCount: 10,
-    hasTimer: true,
-    timePerQuestion: 20,
-    hasLives: true,
-    initialLives: 3,
   },
   {
     id: 'random',

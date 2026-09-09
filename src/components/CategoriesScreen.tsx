@@ -5,7 +5,7 @@ import {
   Zap, ChevronLeft, Search, Play
 } from 'lucide-react';
 import { quizCategories } from '../data/questions';
-import { GAME_MODES } from '../data/gameModes';
+import { CATEGORY_GAME_MODE } from '../data/gameModes';
 import { GameModeInfo } from '../types';
 import { playTapSound } from '../utils/audio';
 
@@ -41,8 +41,7 @@ export const CategoriesScreen: React.FC<CategoriesScreenProps> = ({ onSelectCate
 
   const handleStartCategory = (categoryName: string) => {
     playTapSound();
-    const catMode = GAME_MODES.find(m => m.id === 'categories') || GAME_MODES[4];
-    onSelectCategory(catMode, categoryName);
+    onSelectCategory(CATEGORY_GAME_MODE, categoryName);
   };
 
   return (

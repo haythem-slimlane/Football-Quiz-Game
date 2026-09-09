@@ -89,21 +89,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <Award className="w-4 h-4 text-emerald-400" />
           <span>أوضاع اللعب الرسمية</span>
         </h3>
-        <span className="text-xs text-slate-400">6 أوضاع متنوعة</span>
+        <span className="text-xs text-slate-400">3 أوضاع للعب</span>
       </div>
 
-      {/* Game Modes 6 Cards Grid */}
+      {/* Game Modes Cards Grid */}
       <div className="grid grid-cols-1 gap-2.5 mb-3">
         {GAME_MODES.map((mode) => (
           <div
             key={mode.id}
             id={`mode-card-${mode.id}`}
             onClick={() => {
-              if (mode.id === 'categories') {
-                onNavigateToCategories();
-              } else {
-                onStartGame(mode);
-              }
+              onStartGame(mode);
             }}
             className="group p-3.5 rounded-2xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-200 cursor-pointer flex items-center justify-between active:scale-[0.99] shadow-sm"
           >

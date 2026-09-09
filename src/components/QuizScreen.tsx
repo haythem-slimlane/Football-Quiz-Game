@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { 
   Heart, Flame, Clock, X, Check, ArrowLeft, 
-  HelpCircle, Sparkles, Volume2, VolumeX, AlertCircle 
+  Sparkles, Volume2, VolumeX, AlertCircle 
 } from 'lucide-react';
 import { Question, GameModeInfo, UserAnswer, QuizSessionSummary } from '../types';
 import { allQuestions, isCategoryMatch } from '../data/questions';
@@ -488,23 +488,13 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
         })}
       </div>
 
-      {/* Answer Explanation & Next Button Card */}
+      {/* Next Question Button */}
       {isAnswered && (
-        <div className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-4 mb-2 animate-in fade-in slide-in-from-bottom-2 duration-300">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-              <HelpCircle className="w-3.5 h-3.5" />
-              معلومة كروية موثقة
-            </span>
-          </div>
-          <p className="text-xs text-slate-300 leading-relaxed mb-3">
-            {currentQuestion.explanation}
-          </p>
-
+        <div className="w-full mt-3 mb-2 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <button
             id="next-question-btn"
             onClick={handleNextQuestion}
-            className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-950/60 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+            className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-950/60 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
           >
             <span>السؤال التالي</span>
             <ArrowLeft className="w-4 h-4" />
