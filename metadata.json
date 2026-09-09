@@ -1,0 +1,6 @@
+{
+  "name": "كويز كرة القدم - كووورة",
+  "description": "تطبيق مسابقات واختبارات كرة القدم الشامل بـ 500 سؤال أصلي باللغة العربية مع واجهة أندرويد أنيقة وعصرية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
