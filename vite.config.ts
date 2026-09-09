@@ -64,9 +64,31 @@ function aistudioMediaPlugin(): Plugin {
 }
 // LINT.ThenChange(//depot/google3/java/com/google/alkali/boq/makersuite/applet_dev_service/templates/initializers/react_theme/vite.config.ts:aistudio_media_plugin)
 
+function apkDownloadPlugin(): Plugin {
+  return {
+    name: 'apk-download-plugin',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url && (req.url === '/kooora-quiz.apk' || req.url.startsWith('/kooora-quiz.apk?') || req.url === '/app.apk')) {
+          const apkPath = path.resolve(__dirname, 'public', 'kooora-quiz.apk');
+          if (fs.existsSync(apkPath)) {
+            const stat = fs.statSync(apkPath);
+            res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+            res.setHeader('Content-Disposition', 'attachment; filename="kooora-quiz.apk"');
+            res.setHeader('Content-Length', stat.size);
+            fs.createReadStream(apkPath).pipe(res);
+            return;
+          }
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss(), aistudioMediaPlugin()],
+    plugins: [react(), tailwindcss(), aistudioMediaPlugin(), apkDownloadPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

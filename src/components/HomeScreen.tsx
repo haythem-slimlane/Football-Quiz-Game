@@ -1,12 +1,11 @@
 import React from 'react';
 import { 
   Trophy, Zap, Medal, Flame, Grid, Shuffle, 
-  Volume2, VolumeX, ChevronLeft, Award
+  ChevronLeft, Award
 } from 'lucide-react';
 import { GameModeInfo } from '../types';
 import { GAME_MODES } from '../data/gameModes';
 import { getUserStats } from '../utils/storage';
-import { isSoundEnabled, toggleSound, playTapSound } from '../utils/audio';
 
 interface HomeScreenProps {
   onStartGame: (mode: GameModeInfo, categoryId?: string) => void;
@@ -20,14 +19,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onNavigateToCategories,
   onNavigateToStats,
 }) => {
-  const [soundOn, setSoundOn] = React.useState(isSoundEnabled());
   const stats = getUserStats();
-
-  const handleToggleSound = () => {
-    const updated = toggleSound();
-    setSoundOn(updated);
-    if (updated) playTapSound();
-  };
 
   const getModeIcon = (iconName: string) => {
     switch (iconName) {
@@ -59,20 +51,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <p className="text-xs text-slate-400">تحدي كرة القدم العربي الشامل</p>
           </div>
         </div>
-
-        <button
-          id="toggle-sound-btn"
-          onClick={handleToggleSound}
-          className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700/60 transition-colors shadow-sm"
-          title={soundOn ? 'كتم الصوت' : 'تشغيل الصوت'}
-        >
-          {soundOn ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
-        </button>
       </div>
 
       {/* User Stats Quick Pills */}
       <div 
-        onClick={() => { playTapSound(); onNavigateToStats(); }}
+        onClick={() => { onNavigateToStats(); }}
         className="w-full bg-gradient-to-r from-slate-900 via-slate-800/90 to-slate-900 p-3 rounded-2xl border border-slate-800 mb-5 cursor-pointer hover:border-slate-700 transition-all flex items-center justify-between"
       >
         <div className="flex items-center gap-4 text-center">
@@ -116,7 +99,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             key={mode.id}
             id={`mode-card-${mode.id}`}
             onClick={() => {
-              playTapSound();
               if (mode.id === 'categories') {
                 onNavigateToCategories();
               } else {

@@ -1,0 +1,23 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'>
+  <defs>
+    <linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#064e3b'/>
+      <stop offset='50%' stop-color='#0f172a'/>
+      <stop offset='100%' stop-color='#022c22'/>
+    </linearGradient>
+    <radialGradient id='ball' cx='40%' cy='40%' r='60%'>
+      <stop offset='0%' stop-color='#ffffff'/>
+      <stop offset='85%' stop-color='#e2e8f0'/>
+      <stop offset='100%' stop-color='#94a3b8'/>
+    </radialGradient>
+  </defs>
+  <rect width='512' height='512' rx='110' fill='url(#bg)' stroke='#10b981' stroke-width='14'/>
+  <circle cx='256' cy='240' r='140' fill='url(#ball)' stroke='#0f172a' stroke-width='6'/>
+  <polygon points='256,180 290,205 277,245 235,245 222,205' fill='#0f172a'/>
+  <polygon points='256,110 270,140 242,140' fill='#0f172a'/>
+  <polygon points='360,200 375,230 350,240' fill='#0f172a'/>
+  <polygon points='152,200 137,230 162,240' fill='#0f172a'/>
+  <polygon points='200,320 220,355 180,355' fill='#0f172a'/>
+  <polygon points='312,320 292,355 332,355' fill='#0f172a'/>
+  <text x='256' y='445' font-family='sans-serif' font-size='46' font-weight='bold' fill='#34d399' text-anchor='middle'>كويز كووورة</text>
+</svg>
